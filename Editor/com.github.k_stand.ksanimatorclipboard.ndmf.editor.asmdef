@@ -1,0 +1,21 @@
+{
+    "name": "com.github.k_stand.ksanimatorclipboard.ndmf.editor",
+    "rootNamespace": "",
+    "references": [
+        "com.github.k_stand.ksanimatorclipboard.editor",
+        "nadena.dev.ndmf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "System.Collections.Immutable.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

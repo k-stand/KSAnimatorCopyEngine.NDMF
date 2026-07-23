@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using nadena.dev.ndmf.animator;
+
+namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying
+{
+    internal sealed class VirtualChildStateMachineCopyObjectKind : IVirtualAnimatorCopyObjectKind
+    {
+        public Type ObjectType => typeof(VirtualStateMachine.VirtualChildStateMachine);
+
+        public VirtualAnimatorCopyClipSet.VirtualAnimatorCopyClipSetType SingleClipSetType => VirtualAnimatorCopyClipSet.VirtualAnimatorCopyClipSetType.ChildStateMachine;
+
+        public bool IsInStateMachineObject => true;
+
+        public IEnumerable<object> GetCloneScope(object wrappedObject)
+        {
+            VirtualStateMachine stateMachine = ((VirtualStateMachine.VirtualChildStateMachine)wrappedObject).StateMachine;
+            if (stateMachine == null) return Array.Empty<object>();
+
+            return new object[] { stateMachine }.Concat(VirtualAnimatorGraphTraversal.ListupObjectsInStateMachine(stateMachine));
+        }
+    }
+}
