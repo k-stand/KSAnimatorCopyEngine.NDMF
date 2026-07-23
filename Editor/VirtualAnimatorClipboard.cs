@@ -17,12 +17,20 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 単一のVirtualLayerをコピーします。
         /// </summary>
+        /// <param name="layer">コピー対象のレイヤー。</param>
+        /// <param name="parentController">layerが属している親VirtualAnimatorController。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(VirtualLayer layer, VirtualAnimatorController parentController, out VirtualAnimatorCopyClipSet result)
             => TryCopy(new[] { layer }, parentController, out result);
 
         /// <summary>
         /// 単一のVirtualLayerをコピーします。
         /// </summary>
+        /// <param name="layer">コピー対象のレイヤー。</param>
+        /// <param name="parentController">layerが属している親VirtualAnimatorController。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(VirtualLayer layer, VirtualAnimatorController parentController)
         {
             if (!TryCopy(layer, parentController, out VirtualAnimatorCopyClipSet result))
@@ -35,6 +43,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualLayerをまとめてコピーします。
         /// </summary>
+        /// <param name="layers">コピー対象のレイヤーの列挙。</param>
+        /// <param name="parentController">layersが属している親VirtualAnimatorController。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(IEnumerable<VirtualLayer> layers, VirtualAnimatorController parentController, out VirtualAnimatorCopyClipSet result)
         {
             VirtualAnimatorCopyClipSet clipSet = new(layers, parentController);
@@ -50,6 +62,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualLayerをまとめてコピーします。
         /// </summary>
+        /// <param name="layers">コピー対象のレイヤーの列挙。</param>
+        /// <param name="parentController">layersが属している親VirtualAnimatorController。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(IEnumerable<VirtualLayer> layers, VirtualAnimatorController parentController)
         {
             if (!TryCopy(layers, parentController, out VirtualAnimatorCopyClipSet result))
@@ -62,12 +78,20 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateMachine配下の単一オブジェクト(State/StateMachine/Transition等)を、その親レイヤーを祖先としてコピーします。
         /// </summary>
+        /// <param name="obj">コピー対象のオブジェクト。</param>
+        /// <param name="parentLayer">objが属している親VirtualLayer。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(object obj, VirtualLayer parentLayer, out VirtualAnimatorCopyClipSet result)
             => TryCopy(new[] { obj }, parentLayer.StateMachine, out result);
 
         /// <summary>
         /// VirtualStateMachine配下の単一オブジェクト(State/StateMachine/Transition等)を、その親レイヤーを祖先としてコピーします。
         /// </summary>
+        /// <param name="obj">コピー対象のオブジェクト。</param>
+        /// <param name="parentLayer">objが属している親VirtualLayer。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(object obj, VirtualLayer parentLayer)
         {
             if (!TryCopy(obj, parentLayer, out VirtualAnimatorCopyClipSet result))
@@ -80,12 +104,20 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateMachine配下の複数オブジェクトを、その親レイヤーを祖先としてまとめてコピーします。
         /// </summary>
+        /// <param name="objs">コピー対象のオブジェクトの列挙。</param>
+        /// <param name="parentLayer">objsが属している親VirtualLayer。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(IEnumerable<object> objs, VirtualLayer parentLayer, out VirtualAnimatorCopyClipSet result)
             => TryCopy(objs, parentLayer.StateMachine, out result);
 
         /// <summary>
         /// VirtualStateMachine配下の複数オブジェクトを、その親レイヤーを祖先としてまとめてコピーします。
         /// </summary>
+        /// <param name="objs">コピー対象のオブジェクトの列挙。</param>
+        /// <param name="parentLayer">objsが属している親VirtualLayer。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(IEnumerable<object> objs, VirtualLayer parentLayer)
         {
             if (!TryCopy(objs, parentLayer, out VirtualAnimatorCopyClipSet result))
@@ -98,12 +130,20 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateMachine配下の単一オブジェクト(State/StateMachine/Transition等)を、指定した祖先VirtualStateMachineを基準にコピーします。
         /// </summary>
+        /// <param name="obj">コピー対象のオブジェクト。</param>
+        /// <param name="ancestorStateMachine">objの祖先となるVirtualStateMachine。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(object obj, VirtualStateMachine ancestorStateMachine, out VirtualAnimatorCopyClipSet result)
             => TryCopy(new[] { obj }, ancestorStateMachine, out result);
 
         /// <summary>
         /// VirtualStateMachine配下の単一オブジェクト(State/StateMachine/Transition等)を、指定した祖先VirtualStateMachineを基準にコピーします。
         /// </summary>
+        /// <param name="obj">コピー対象のオブジェクト。</param>
+        /// <param name="ancestorStateMachine">objの祖先となるVirtualStateMachine。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(object obj, VirtualStateMachine ancestorStateMachine)
         {
             if (!TryCopy(obj, ancestorStateMachine, out VirtualAnimatorCopyClipSet result))
@@ -117,6 +157,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// VirtualStateMachine配下の複数オブジェクトを、指定した祖先VirtualStateMachineを基準にまとめてコピーします。
         /// 対象が全てancestorStateMachineの子孫でない場合は失敗します。
         /// </summary>
+        /// <param name="objs">コピー対象のオブジェクトの列挙。</param>
+        /// <param name="ancestorStateMachine">objsの祖先となるVirtualStateMachine。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(IEnumerable<object> objs, VirtualStateMachine ancestorStateMachine, out VirtualAnimatorCopyClipSet result)
         {
             VirtualAnimatorCopyClipSet clipSet = new(objs, ancestorStateMachine);
@@ -132,6 +176,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateMachine配下の複数オブジェクトを、指定した祖先VirtualStateMachineを基準にまとめてコピーします。
         /// </summary>
+        /// <param name="objs">コピー対象のオブジェクトの列挙。</param>
+        /// <param name="ancestorStateMachine">objsの祖先となるVirtualStateMachine。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(IEnumerable<object> objs, VirtualStateMachine ancestorStateMachine)
         {
             if (!TryCopy(objs, ancestorStateMachine, out VirtualAnimatorCopyClipSet result))
@@ -144,12 +192,18 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 単一のStateMachineBehaviourをコピーします。
         /// </summary>
+        /// <param name="behaviour">コピー対象のStateMachineBehaviour。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(StateMachineBehaviour behaviour, out VirtualAnimatorCopyClipSet result)
             => TryCopy(new[] { behaviour }, out result);
 
         /// <summary>
         /// 単一のStateMachineBehaviourをコピーします。
         /// </summary>
+        /// <param name="behaviour">コピー対象のStateMachineBehaviour。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(StateMachineBehaviour behaviour)
         {
             if (!TryCopy(behaviour, out VirtualAnimatorCopyClipSet result))
@@ -162,6 +216,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のStateMachineBehaviourをまとめてコピーします。
         /// </summary>
+        /// <param name="behaviours">コピー対象のStateMachineBehaviourの列挙。</param>
+        /// <param name="result">成功した場合はコピー結果のVirtualAnimatorCopyClipSet、失敗した場合はnull。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryCopy(IEnumerable<StateMachineBehaviour> behaviours, out VirtualAnimatorCopyClipSet result)
         {
             VirtualAnimatorCopyClipSet clipSet = new(behaviours);
@@ -177,6 +234,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のStateMachineBehaviourをまとめてコピーします。
         /// </summary>
+        /// <param name="behaviours">コピー対象のStateMachineBehaviourの列挙。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
+        /// <exception cref="ArgumentException">コピーに失敗した場合。</exception>
         public static VirtualAnimatorCopyClipSet Copy(IEnumerable<StateMachineBehaviour> behaviours)
         {
             if (!TryCopy(behaviours, out VirtualAnimatorCopyClipSet result))
@@ -189,16 +249,25 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 祖先や親コンテキストの妥当性検証を行わずに、単一のオブジェクトをコピーします。
         /// </summary>
+        /// <param name="obj">コピー対象のオブジェクト。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
         public static VirtualAnimatorCopyClipSet Copy(object obj) => new(obj);
 
         /// <summary>
         /// 祖先や親コンテキストの妥当性検証を行わずに、複数のオブジェクトをまとめてコピーします。
         /// </summary>
+        /// <param name="objs">コピー対象のオブジェクトの列挙。</param>
+        /// <returns>コピー結果のVirtualAnimatorCopyClipSet。</returns>
         public static VirtualAnimatorCopyClipSet Copy(IEnumerable<object> objs) => new(objs);
 
         /// <summary>
         /// clipSetの内容(Layers種別)を、destAnimatorControllerへ新しいレイヤーとして貼り付けます。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Layers種別である必要があります。</param>
+        /// <param name="destAnimatorController">貼り付け先のVirtualAnimatorController。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <param name="result">成功した場合は貼り付けられたレイヤーの配列、失敗した場合はnull。</param>
+        /// <returns>貼り付けに成功した場合はtrue。</returns>
         public static bool TryPasteLayers(
             VirtualAnimatorCopyClipSet clipSet,
             VirtualAnimatorController destAnimatorController,
@@ -242,6 +311,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(Layers種別)を、destAnimatorControllerへ新しいレイヤーとして貼り付けます。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Layers種別である必要があります。</param>
+        /// <param name="destAnimatorController">貼り付け先のVirtualAnimatorController。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <returns>貼り付けられたレイヤーの配列。</returns>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetがLayers種別でない場合。</exception>
         public static VirtualLayer[] PasteLayers(
             VirtualAnimatorCopyClipSet clipSet,
             VirtualAnimatorController destAnimatorController,
@@ -258,6 +332,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// clipSetの内容(VirtualStateMachine配下のオブジェクト)を、destLayer直下のVirtualStateMachineへ貼り付けます。
         /// 実体はTryPasteIntoStateMachine(destLayer.StateMachine)への委譲です。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。</param>
+        /// <param name="destLayer">貼り付け先のVirtualLayer。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <param name="result">成功した場合は貼り付けられたオブジェクトの配列、失敗した場合はnull。</param>
+        /// <returns>貼り付けに成功した場合はtrue。</returns>
         public static bool TryPasteIntoLayer(
             VirtualAnimatorCopyClipSet clipSet, VirtualLayer destLayer, CloneContext context,
             out object[] result)
@@ -266,6 +345,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(VirtualStateMachine配下のオブジェクト)を、destLayer直下のVirtualStateMachineへ貼り付けます。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。</param>
+        /// <param name="destLayer">貼り付け先のVirtualLayer。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <returns>貼り付けられたオブジェクトの配列。</returns>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetがVirtualStateMachine配下のオブジェクトを表す種別でない場合。</exception>
         public static object[] PasteIntoLayer(
             VirtualAnimatorCopyClipSet clipSet, VirtualLayer destLayer, CloneContext context)
             => PasteIntoStateMachine(clipSet, destLayer.StateMachine, context);
@@ -274,6 +358,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// clipSetの内容(VirtualStateMachine配下のオブジェクト)を、destStateMachineへ貼り付けます。
         /// 貼り付け先がコピー元の祖先の子孫である場合はコピー元との参照を保持し、そうでない場合は貼り付け先の子孫のみ参照を保持します。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。VirtualStateMachine配下のオブジェクトを表す種別である必要があります。</param>
+        /// <param name="destStateMachine">貼り付け先のVirtualStateMachine。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <param name="result">成功した場合は貼り付けられた全オブジェクトの配列、失敗した場合はnull。</param>
+        /// <returns>貼り付けに成功した場合はtrue。</returns>
         public static bool TryPasteIntoStateMachine(
             VirtualAnimatorCopyClipSet clipSet, VirtualStateMachine destStateMachine, CloneContext context,
             out object[] result)
@@ -421,6 +510,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(VirtualStateMachine配下のオブジェクト)を、destStateMachineへ貼り付けます。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。VirtualStateMachine配下のオブジェクトを表す種別である必要があります。</param>
+        /// <param name="destStateMachine">貼り付け先のVirtualStateMachine。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <returns>貼り付けられた全オブジェクトの配列。</returns>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetがVirtualStateMachine配下のオブジェクトを表す種別でない場合。</exception>
         public static object[] PasteIntoStateMachine(
             VirtualAnimatorCopyClipSet clipSet, VirtualStateMachine destStateMachine, CloneContext context)
         {
@@ -434,6 +528,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(Behaviours種別)をクローンし、destStateMachineのBehavioursへ追加します。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Behaviours種別である必要があります。</param>
+        /// <param name="destStateMachine">貼り付け先のVirtualStateMachine。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <param name="result">成功した場合は貼り付けられたStateMachineBehaviourの配列、失敗した場合はnull。</param>
+        /// <returns>貼り付けに成功した場合はtrue。</returns>
         public static bool TryPasteBehaviours(VirtualAnimatorCopyClipSet clipSet, VirtualStateMachine destStateMachine, CloneContext context, out StateMachineBehaviour[] result)
         {
             if (!TryCloneBehaviours(clipSet, context, out result)) return false;
@@ -444,6 +543,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(Behaviours種別)をクローンし、destStateMachineのBehavioursへ追加します。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Behaviours種別である必要があります。</param>
+        /// <param name="destStateMachine">貼り付け先のVirtualStateMachine。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <returns>貼り付けられたStateMachineBehaviourの配列。</returns>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetがBehaviours種別でない場合。</exception>
         public static StateMachineBehaviour[] PasteBehaviours(VirtualAnimatorCopyClipSet clipSet, VirtualStateMachine destStateMachine, CloneContext context)
         {
             if (!TryPasteBehaviours(clipSet, destStateMachine, context, out StateMachineBehaviour[] result))
@@ -456,6 +560,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(Behaviours種別)をクローンし、destStateのBehavioursへ追加します。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Behaviours種別である必要があります。</param>
+        /// <param name="destState">貼り付け先のVirtualState。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <param name="result">成功した場合は貼り付けられたStateMachineBehaviourの配列、失敗した場合はnull。</param>
+        /// <returns>貼り付けに成功した場合はtrue。</returns>
         public static bool TryPasteBehaviours(VirtualAnimatorCopyClipSet clipSet, VirtualState destState, CloneContext context, out StateMachineBehaviour[] result)
         {
             if (!TryCloneBehaviours(clipSet, context, out result)) return false;
@@ -466,6 +575,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSetの内容(Behaviours種別)をクローンし、destStateのBehavioursへ追加します。
         /// </summary>
+        /// <param name="clipSet">貼り付け対象のVirtualAnimatorCopyClipSet。Behaviours種別である必要があります。</param>
+        /// <param name="destState">貼り付け先のVirtualState。</param>
+        /// <param name="context">クローン処理に使用するCloneContext。</param>
+        /// <returns>貼り付けられたStateMachineBehaviourの配列。</returns>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetがBehaviours種別でない場合。</exception>
         public static StateMachineBehaviour[] PasteBehaviours(VirtualAnimatorCopyClipSet clipSet, VirtualState destState, CloneContext context)
         {
             if (!TryPasteBehaviours(clipSet, destState, context, out StateMachineBehaviour[] result))
@@ -507,6 +621,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// clipSet(単一のVirtualChildStateを表すもの)のVirtualStateとしての設定値を、destStateへ上書きコピーします。
         /// Name/Behaviours/Transitionsはdest側の値が維持されます。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateMachine.VirtualChildStateを表す種別である必要があります。</param>
+        /// <param name="destState">コピー先のVirtualState。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualState destState)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualStateMachine.VirtualChildState srcChildState)) return false;
@@ -517,6 +634,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualChildStateを表すもの)のVirtualStateとしての設定値を、destStateへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateMachine.VirtualChildStateを表す種別である必要があります。</param>
+        /// <param name="destState">コピー先のVirtualState。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualStateMachine.VirtualChildStateを表す種別でない場合。</exception>
         public static void PasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualState destState)
         {
             if (!TryPasteSettings(clipSet, destState))
@@ -548,6 +668,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)のMute/Solo設定を、destTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualTransition srcTransition)) return false;
@@ -558,6 +681,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)のMute/Solo設定を、destTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualTransitionを表す種別でない場合。</exception>
         public static void PasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryPasteSettings(clipSet, destTransition))
@@ -566,6 +692,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcTransitionのMute/Solo設定を、destTransitionへ上書きコピーします。
+        /// </summary>
+        /// <param name="srcTransition">コピー元のVirtualTransition。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
         // hideFlagsはVirtual API側に対応する概念がないため省略する(技術的に必須な変更)。
         public static void PasteSettings(VirtualTransition srcTransition, VirtualTransition destTransition)
         {
@@ -576,6 +707,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)のConditionsを、destTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteConditions(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualTransition srcTransition)) return false;
@@ -586,6 +720,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)のConditionsを、destTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualTransitionを表す種別でない場合。</exception>
         public static void PasteConditions(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryPasteConditions(clipSet, destTransition))
@@ -594,11 +731,19 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcTransitionのConditionsを、destTransitionへ上書きコピーします。
+        /// </summary>
+        /// <param name="srcTransition">コピー元のVirtualTransition。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
         public static void PasteConditions(VirtualTransition srcTransition, VirtualTransition destTransition) => destTransition.Conditions = srcTransition.Conditions;
 
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)の設定値とConditionsを、まとめてdestTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteSettingsAndConditions(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualTransition srcTransition)) return false;
@@ -609,6 +754,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualTransitionを表すもの)の設定値とConditionsを、まとめてdestTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualTransitionを表す種別である必要があります。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualTransitionを表す種別でない場合。</exception>
         public static void PasteSettingsAndConditions(VirtualAnimatorCopyClipSet clipSet, VirtualTransition destTransition)
         {
             if (!TryPasteSettingsAndConditions(clipSet, destTransition))
@@ -617,6 +765,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcTransitionの設定値とConditionsを、まとめてdestTransitionへ上書きコピーします。
+        /// </summary>
+        /// <param name="srcTransition">コピー元のVirtualTransition。</param>
+        /// <param name="destTransition">コピー先のVirtualTransition。</param>
         public static void PasteSettingsAndConditions(VirtualTransition srcTransition, VirtualTransition destTransition)
         {
             PasteSettings(srcTransition, destTransition);
@@ -627,6 +780,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// clipSet(単一のVirtualStateTransitionを表すもの)の設定値を、destStateTransitionへ上書きコピーします。
         /// Conditions/DestinationState/DestinationStateMachine/IsExit/Nameはdest側の値が維持されます。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualStateTransition srcStateTransition)) return false;
@@ -637,6 +793,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualStateTransitionを表すもの)の設定値を、destStateTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualStateTransitionを表す種別でない場合。</exception>
         public static void PasteSettings(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryPasteSettings(clipSet, destStateTransition))
@@ -645,6 +804,12 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcStateTransitionの設定値を、destStateTransitionへ上書きコピーします。
+        /// Conditions/DestinationState/DestinationStateMachine/IsExit/Nameはdest側の値が維持されます。
+        /// </summary>
+        /// <param name="srcStateTransition">コピー元のVirtualStateTransition。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
         public static void PasteSettings(VirtualStateTransition srcStateTransition, VirtualStateTransition destStateTransition)
         {
             destStateTransition.CanTransitionToSelf = srcStateTransition.CanTransitionToSelf;
@@ -661,6 +826,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualStateTransitionを表すもの)のConditionsを、destStateTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteConditions(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualStateTransition srcStateTransition)) return false;
@@ -671,6 +839,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualStateTransitionを表すもの)のConditionsを、destStateTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualStateTransitionを表す種別でない場合。</exception>
         public static void PasteConditions(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryPasteConditions(clipSet, destStateTransition))
@@ -679,11 +850,19 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcStateTransitionのConditionsを、destStateTransitionへ上書きコピーします。
+        /// </summary>
+        /// <param name="srcStateTransition">コピー元のVirtualStateTransition。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
         public static void PasteConditions(VirtualStateTransition srcStateTransition, VirtualStateTransition destStateTransition) => destStateTransition.Conditions = srcStateTransition.Conditions;
 
         /// <summary>
         /// clipSet(単一のVirtualStateTransitionを表すもの)の設定値とConditionsを、まとめてdestStateTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <returns>コピーに成功した場合はtrue。</returns>
         public static bool TryPasteSettingsAndConditions(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryValidateAndGetSingleClipObjectType(clipSet, out VirtualStateTransition srcStateTransition)) return false;
@@ -694,6 +873,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// clipSet(単一のVirtualStateTransitionを表すもの)の設定値とConditionsを、まとめてdestStateTransitionへ上書きコピーします。
         /// </summary>
+        /// <param name="clipSet">コピー元のVirtualAnimatorCopyClipSet。単一のVirtualStateTransitionを表す種別である必要があります。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
+        /// <exception cref="VirtualAnimatorCopyClipSetTypeMismatchException">clipSetが単一のVirtualStateTransitionを表す種別でない場合。</exception>
         public static void PasteSettingsAndConditions(VirtualAnimatorCopyClipSet clipSet, VirtualStateTransition destStateTransition)
         {
             if (!TryPasteSettingsAndConditions(clipSet, destStateTransition))
@@ -702,6 +884,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
             }
         }
 
+        /// <summary>
+        /// srcStateTransitionの設定値とConditionsを、まとめてdestStateTransitionへ上書きコピーします。
+        /// </summary>
+        /// <param name="srcStateTransition">コピー元のVirtualStateTransition。</param>
+        /// <param name="destStateTransition">コピー先のVirtualStateTransition。</param>
         public static void PasteSettingsAndConditions(VirtualStateTransition srcStateTransition, VirtualStateTransition destStateTransition)
         {
             PasteSettings(srcStateTransition, destStateTransition);

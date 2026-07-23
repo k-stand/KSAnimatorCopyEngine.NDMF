@@ -7,6 +7,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
     /// </summary>
     public sealed class VirtualAnimatorCopyClipSetTypeMismatchException : InvalidOperationException
     {
+        /// <summary>
+        /// VirtualAnimatorCopyClipSetTypeMismatchExceptionの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="message">例外の内容を説明するメッセージ。</param>
         public VirtualAnimatorCopyClipSetTypeMismatchException(string message) : base(message) { }
     }
 }

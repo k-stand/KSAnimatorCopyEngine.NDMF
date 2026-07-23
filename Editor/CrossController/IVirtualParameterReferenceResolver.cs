@@ -19,6 +19,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
         /// <summary>
         /// 指定されたBehaviourが参照しているAnimatorControllerParameter名を列挙します。
         /// </summary>
+        /// <param name="behaviour">解決対象のStateMachineBehaviour。BehaviourTypeと同じ型のインスタンスが渡されます。</param>
+        /// <returns>参照されているパラメーター名の列挙。</returns>
         IEnumerable<string> GetReferencedParameterNames(StateMachineBehaviour behaviour);
     }
 }

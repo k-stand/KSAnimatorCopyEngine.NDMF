@@ -18,6 +18,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// StateMachineBehaviourが参照するパラメーターは、VirtualParameterReferenceResolverRegistry経由で登録されたresolverを経由して収集されます
         /// (未登録の型は参照なしとして扱われます)。
         /// </summary>
+        /// <param name="clipSet">検証対象のVirtualAnimatorCopyClipSet。</param>
+        /// <param name="destController">存在確認の基準にする貼り付け先のVirtualAnimatorController。</param>
+        /// <returns>destControllerに存在しないパラメーター名の一覧。</returns>
+        /// <exception cref="ArgumentNullException">clipSetまたはdestControllerがnullの場合。</exception>
         public static IReadOnlyList<string> FindMissingParameters(VirtualAnimatorCopyClipSet clipSet, VirtualAnimatorController destController)
         {
             if (clipSet == null) throw new ArgumentNullException(nameof(clipSet));

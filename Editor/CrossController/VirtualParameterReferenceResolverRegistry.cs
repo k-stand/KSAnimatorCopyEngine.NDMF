@@ -18,6 +18,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
         /// <summary>
         /// IVirtualParameterReferenceResolverを登録します。同じBehaviourTypeが既に登録済みの場合は上書きされます。
         /// </summary>
+        /// <param name="resolver">登録するresolver。</param>
+        /// <exception cref="ArgumentNullException">resolverがnullの場合。</exception>
         public void Register(IVirtualParameterReferenceResolver resolver)
         {
             if (resolver == null) throw new ArgumentNullException(nameof(resolver));
@@ -27,6 +29,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
         /// <summary>
         /// 指定した型に対応するIVirtualParameterReferenceResolverの登録を解除します。
         /// </summary>
+        /// <param name="behaviourType">登録を解除するBehaviourType。</param>
         public void Unregister(Type behaviourType) => _resolvers.Remove(behaviourType);
 
         internal IVirtualParameterReferenceResolver Resolve(Type type)

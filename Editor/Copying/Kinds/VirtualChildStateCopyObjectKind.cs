@@ -16,6 +16,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying
         public IEnumerable<object> GetCloneScope(object wrappedObject)
         {
             VirtualState state = ((VirtualStateMachine.VirtualChildState)wrappedObject).State;
+            // stateが未設定の場合は例外を出さず空スコープを返し、呼び出し元は静かに無登録で終わる
             if (state == null) return Array.Empty<object>();
 
             return new object[] { state }.Concat(state.Transitions).Concat(state.Behaviours);

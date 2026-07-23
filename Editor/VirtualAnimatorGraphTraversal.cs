@@ -4,6 +4,11 @@ using nadena.dev.ndmf.animator;
 
 namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
 {
+    // コピー範囲(IVirtualAnimatorCopyObjectKind.GetCloneScope)を求めるための、VirtualStateMachine配下
+    // オブジェクトの列挙。同じくグラフを辿るVirtualAnimatorGraphSchemaとは用途が異なるため列挙範囲も異なる:
+    // Behaviours(VirtualStateMachine/VirtualState双方)はここでは含めない。BehavioursのClonePolicyは
+    // GetCloneScopeではなく、VirtualAnimatorCloner.RegisterChildrenRecursivelyによる親子関係の登録
+    // (_parentMap経由の継承)で解決されるため。生API版AnimatorGraphTraversalと同じ設計を踏襲している。
     internal static class VirtualAnimatorGraphTraversal
     {
         internal static HashSet<VirtualNode> ListupObjectsInLayer(VirtualLayer layer)
