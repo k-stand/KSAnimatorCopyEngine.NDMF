@@ -5,11 +5,12 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
 {
     /// <summary>
     /// IVirtualParameterReferenceResolverの登録・解決を行うレジストリです。
+    /// 本パッケージ内部でのみ利用され、外部パッケージからは拡張できません。
     /// </summary>
-    public sealed class VirtualParameterReferenceResolverRegistry
+    internal sealed class VirtualParameterReferenceResolverRegistry
     {
         /// <summary>
-        /// プロセス全体で共有されるデフォルトインスタンスを取得します。外部パッケージはこのインスタンスにResolverを登録します。
+        /// プロセス全体で共有されるデフォルトインスタンスを取得します。本パッケージ内のVRChatAvatars対応モジュール(Editor/VRChatAvatars)が、このインスタンスにResolverを登録します。
         /// </summary>
         public static VirtualParameterReferenceResolverRegistry Shared { get; } = CreateDefault();
 

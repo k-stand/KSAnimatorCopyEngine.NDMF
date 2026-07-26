@@ -1,7 +1,7 @@
 {
     "name": "com.github.k-stand.ksanimatorclipboard.ndmf",
     "displayName": "KS Animator Clipboard (NDMF)",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "unity": "2022.3",
     "description": "KS Animator ClipboardのNDMF Virtual Animator API(nadena.dev.ndmf.animator)対応版",
     "author": {
@@ -12,6 +12,7 @@
     "url": "",
     "vpmDependencies": {
         "com.github.k-stand.ksanimatorclipboard": ">=0.5.0",
-        "nadena.dev.ndmf": ">=1.14.0"
+        "nadena.dev.ndmf": ">=1.14.0",
+        "com.vrchat.avatars": ">=3.0.0"
     }
 }

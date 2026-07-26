@@ -6,10 +6,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
 {
     /// <summary>
     /// StateMachineBehaviourの具象型ごとに、そのBehaviourが参照しているAnimatorControllerParameter名を取得するための拡張ポイントです。
-    /// コアパッケージが標準では解決できないサードパーティ製Behaviour(VRChatのVRCAvatarParameterDriver等)のパラメーター参照を、
-    /// 外部パッケージからVirtualParameterReferenceResolverRegistry経由で登録できるようにします。
+    /// 標準では解決できないサードパーティ製Behaviour(VRChatのVRCAvatarParameterDriver等)のパラメーター参照を、
+    /// 本パッケージ内のVRChatAvatars対応モジュール(Editor/VRChatAvatars)がVirtualParameterReferenceResolverRegistry経由で登録します。
+    /// 本パッケージ内部限定の拡張機構であり、外部パッケージからは登録できません。
     /// </summary>
-    public interface IVirtualParameterReferenceResolver
+    internal interface IVirtualParameterReferenceResolver
     {
         /// <summary>
         /// このresolverが解決対象とするStateMachineBehaviourの型を取得します。

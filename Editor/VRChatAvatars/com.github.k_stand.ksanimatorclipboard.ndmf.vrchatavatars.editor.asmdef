@@ -1,0 +1,24 @@
+{
+    "name": "com.github.k_stand.ksanimatorclipboard.ndmf.vrchatavatars.editor",
+    "rootNamespace": "",
+    "references": [
+        "com.github.k_stand.ksanimatorclipboard.editor",
+        "com.github.k_stand.ksanimatorclipboard.ndmf.editor",
+        "nadena.dev.ndmf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "System.Collections.Immutable.dll",
+        "VRCSDKBase.dll",
+        "VRCSDK3A.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
