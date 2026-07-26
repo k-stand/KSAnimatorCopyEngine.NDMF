@@ -62,7 +62,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests.CrossControll
         }
 
         [Test]
-        public void Shared_HasNoResolversRegisteredByDefault()
+        public void Shared_ReturnsNull_ForUnregisteredType()
         {
             Assert.IsNull(VirtualParameterReferenceResolverRegistry.Shared.Resolve(typeof(DummyStateMachineBehaviour)));
         }

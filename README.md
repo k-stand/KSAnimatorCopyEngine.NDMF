@@ -8,8 +8,8 @@
 NDMFビルド中は、実際の`AnimatorController`ではなく`VirtualAnimatorController`/`VirtualLayer`/
 `VirtualStateMachine`/`VirtualState`/`VirtualBlendTree`などのVirtualオブジェクトを編集するのが
 NDMF推奨の作法です。本パッケージは、コアパッケージが提供するCopy/Paste/Clone機能一式(`ClonePolicy`、
-Kindレジストリ、参照解決・クローン結果検証のプラグイン機構を含む)を、これらのVirtualオブジェクトを
-対象として同じ設計思想のまま提供します。
+Kindレジストリ、クローン結果検証のプラグイン機構を含む)を、これらのVirtualオブジェクトを対象として
+同じ設計思想のまま提供します。パラメーター参照解決の仕組み(後述)は本パッケージが独自に持つものです。
 
 コア(`com.github.k-stand.ksanimatorclipboard`)とAPI形状・内部アーキテクチャを可能な限り一致させて
 移植しているため、コア側のドキュメント・使用例もあわせて参照してください。

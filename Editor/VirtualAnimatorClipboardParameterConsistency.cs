@@ -15,8 +15,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
     {
         /// <summary>
         /// clipSetが参照しているパラメーター名のうち、destControllerに存在しないものを列挙します。
-        /// StateMachineBehaviourが参照するパラメーターは、VirtualParameterReferenceResolverRegistry経由で登録されたresolverを経由して収集されます
-        /// (未登録の型は参照なしとして扱われます)。
+        /// StateMachineBehaviourが参照するパラメーターは、本パッケージ内部で固定登録されたresolver(現状VRCAvatarParameterDriver)を
+        /// 経由して収集されます(未登録の型は参照なしとして扱われます)。
         /// </summary>
         /// <param name="clipSet">検証対象のVirtualAnimatorCopyClipSet。</param>
         /// <param name="destController">存在確認の基準にする貼り付け先のVirtualAnimatorController。</param>

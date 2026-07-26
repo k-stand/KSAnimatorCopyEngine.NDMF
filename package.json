@@ -11,7 +11,7 @@
     "license": "MIT",
     "url": "",
     "vpmDependencies": {
-        "com.github.k-stand.ksanimatorclipboard": ">=0.5.0",
+        "com.github.k-stand.ksanimatorclipboard": ">=0.6.0",
         "nadena.dev.ndmf": ">=1.14.0",
         "com.vrchat.avatars": ">=3.0.0"
     }
