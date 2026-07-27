@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// クローンされたオブジェクトから複製元オブジェクトを逆引きできるようにし、複製後に新規生成されたVirtualClip/VirtualBlendTreeへの

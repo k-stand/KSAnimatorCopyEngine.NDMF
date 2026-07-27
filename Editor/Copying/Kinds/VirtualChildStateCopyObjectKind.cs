@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying
 {
     internal sealed class VirtualChildStateCopyObjectKind : IVirtualAnimatorCopyObjectKind
     {

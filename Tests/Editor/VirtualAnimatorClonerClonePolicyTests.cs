@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClonerClonePolicyTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorClonerClonePolicyTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void SetClonePolicy_And_TryGetClonePolicy_RoundTrips()

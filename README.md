@@ -1,6 +1,6 @@
-# KS Animator Clipboard (NDMF)
+# KS Animator Copy Engine (NDMF)
 
-`com.github.k-stand.ksanimatorclipboard`が提供するAnimatorController関連オブジェクトの
+`com.github.k-stand.ksanimatorcopyengine`が提供するAnimatorController関連オブジェクトの
 コピー&ペースト機能を、NDMFのVirtual Animator API(`nadena.dev.ndmf.animator`名前空間)向けに
 提供するライブラリです。
 
@@ -11,37 +11,37 @@ NDMF推奨の作法です。本パッケージは、コアパッケージが提�
 Kindレジストリ、クローン結果検証のプラグイン機構を含む)を、これらのVirtualオブジェクトを対象として
 同じ設計思想のまま提供します。パラメーター参照解決の仕組み(後述)は本パッケージが独自に持つものです。
 
-コア(`com.github.k-stand.ksanimatorclipboard`)とAPI形状・内部アーキテクチャを可能な限り一致させて
+コア(`com.github.k-stand.ksanimatorcopyengine`)とAPI形状・内部アーキテクチャを可能な限り一致させて
 移植しているため、コア側のドキュメント・使用例もあわせて参照してください。
 
 VRChat Avatars SDK固有の型(`VRCAvatarParameterDriver`)への対応は標準で同梱されています。
-`VRCAvatarParameterDriver`が参照するパラメーターは、パラメーター整合性チェック(`VirtualAnimatorClipboardParameterConsistency`)の対象に含まれます。
+`VRCAvatarParameterDriver`が参照するパラメーターは、パラメーター整合性チェック(`VirtualAnimatorCopyEngineParameterConsistency`)の対象に含まれます。
 
 ## インストール
 現時点ではVCC(ALCOM)向けのリポジトリ登録・unitypackage配布は行っていません。
-`com.github.k-stand.ksanimatorclipboard.ndmf`に依存する他パッケージ経由で導入するか、
+`com.github.k-stand.ksanimatorcopyengine.ndmf`に依存する他パッケージ経由で導入するか、
 このプロジェクトの`Packages`フォルダを直接参照して利用してください。
 
 ## 使用方法
 ```csharp
 // Layer単位でコピーして、別のVirtualAnimatorControllerへペースト
-VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(sourceLayer, sourceController);
-VirtualAnimatorClipboard.PasteLayers(clipSet, destController);
+VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(sourceLayer, sourceController);
+VirtualAnimatorCopyEngine.PasteLayers(clipSet, destController);
 
 // State/Transition/BlendTreeなど任意のオブジェクトをコピーして、Layer内にペースト
-VirtualAnimatorCopyClipSet objClipSet = VirtualAnimatorClipboard.Copy(sourceState, sourceLayer);
-VirtualAnimatorClipboard.PasteIntoLayer(objClipSet, destLayer, cloneContext);
+VirtualAnimatorCopyClipSet objClipSet = VirtualAnimatorCopyEngine.Copy(sourceState, sourceLayer);
+VirtualAnimatorCopyEngine.PasteIntoLayer(objClipSet, destLayer, cloneContext);
 
 // 同じコピー内容をNDMFのCloneContext経由でクローンして、独立したコピーとして貼り付ける
 VirtualAnimatorCopyClipSet cloned = objClipSet.Clone(cloneContext, out Dictionary<object, object> clonedMap);
-VirtualAnimatorClipboard.PasteIntoStateMachine(cloned, destStateMachine, cloneContext);
+VirtualAnimatorCopyEngine.PasteIntoStateMachine(cloned, destStateMachine, cloneContext);
 ```
 
 参照先オブジェクトのクローン方針(`ClonePolicy`)は、対応する`IVirtualAnimatorCopyObjectKind`実装の
 登録内容に従います。コア同様、`VirtualAnimatorCloner.ValidateRegistrations()`で未登録の型を事前に検出できます。
 
 ## 依存関係
-- `com.github.k-stand.ksanimatorclipboard`
+- `com.github.k-stand.ksanimatorcopyengine`
 - `nadena.dev.ndmf`
 - `com.vrchat.avatars`
 

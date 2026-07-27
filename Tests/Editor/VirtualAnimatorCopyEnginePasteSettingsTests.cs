@@ -3,18 +3,18 @@ using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClipboardPasteSettingsTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyEnginePasteSettingsTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void TryPasteBehaviours_ReturnsFalse_WhenClipSetTypeMismatches()
         {
             VirtualState state = VirtualState.Create("State1");
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)state);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)state);
             VirtualStateMachine destStateMachine = VirtualStateMachine.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteBehaviours(clipSet, destStateMachine, CloneContext, out StateMachineBehaviour[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteBehaviours(clipSet, destStateMachine, CloneContext, out StateMachineBehaviour[] result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -24,10 +24,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         public void TryPasteBehaviours_ReturnsTrueAndAppliesBehaviours_WhenClipSetTypeMatches()
         {
             DummyStateMachineBehaviour behaviour = ScriptableObject.CreateInstance<DummyStateMachineBehaviour>();
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(behaviour);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(behaviour);
             VirtualStateMachine destStateMachine = VirtualStateMachine.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteBehaviours(clipSet, destStateMachine, CloneContext, out StateMachineBehaviour[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteBehaviours(clipSet, destStateMachine, CloneContext, out StateMachineBehaviour[] result);
 
             Assert.IsTrue(success);
             Assert.AreEqual(1, result.Length);
@@ -39,10 +39,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         public void TryPasteSettings_VirtualState_ReturnsFalse_WhenClipSetTypeMismatches()
         {
             VirtualTransition transition = VirtualTransition.Create();
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)transition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)transition);
             VirtualState destState = VirtualState.Create("Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteSettings(clipSet, destState);
+            bool success = VirtualAnimatorCopyEngine.TryPasteSettings(clipSet, destState);
 
             Assert.IsFalse(success);
         }
@@ -52,11 +52,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualState srcState = VirtualState.Create("Src");
             srcState.Speed = 2.5f;
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)srcState);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)srcState);
             VirtualState destState = VirtualState.Create("Dest");
             destState.Speed = 1f;
 
-            bool success = VirtualAnimatorClipboard.TryPasteSettings(clipSet, destState);
+            bool success = VirtualAnimatorCopyEngine.TryPasteSettings(clipSet, destState);
 
             Assert.IsTrue(success);
             Assert.AreEqual(2.5f, destState.Speed);
@@ -67,10 +67,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         public void PasteSettings_VirtualState_StillThrows_WhenClipSetTypeMismatches()
         {
             VirtualTransition transition = VirtualTransition.Create();
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)transition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)transition);
             VirtualState destState = VirtualState.Create("Dest");
 
-            Assert.Throws<VirtualAnimatorCopyClipSetTypeMismatchException>(() => VirtualAnimatorClipboard.PasteSettings(clipSet, destState));
+            Assert.Throws<VirtualAnimatorCopyClipSetTypeMismatchException>(() => VirtualAnimatorCopyEngine.PasteSettings(clipSet, destState));
         }
 
         [Test]
@@ -78,11 +78,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualStateTransition srcStateTransition = VirtualStateTransition.Create();
             srcStateTransition.Duration = 2.5f;
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)srcStateTransition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)srcStateTransition);
             VirtualStateTransition destStateTransition = VirtualStateTransition.Create();
             destStateTransition.Duration = 1f;
 
-            bool success = VirtualAnimatorClipboard.TryPasteSettings(clipSet, destStateTransition);
+            bool success = VirtualAnimatorCopyEngine.TryPasteSettings(clipSet, destStateTransition);
 
             Assert.IsTrue(success);
             Assert.AreEqual(2.5f, destStateTransition.Duration);
@@ -93,10 +93,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualTransition srcTransition = VirtualTransition.Create();
             srcTransition.Conditions = srcTransition.Conditions.Add(new AnimatorCondition { parameter = "TestParam", mode = AnimatorConditionMode.If });
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)srcTransition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)srcTransition);
             VirtualTransition destTransition = VirtualTransition.Create();
 
-            bool success = VirtualAnimatorClipboard.TryPasteConditions(clipSet, destTransition);
+            bool success = VirtualAnimatorCopyEngine.TryPasteConditions(clipSet, destTransition);
 
             Assert.IsTrue(success);
             Assert.AreEqual(1, destTransition.Conditions.Count);
@@ -109,10 +109,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             VirtualStateTransition srcStateTransition = VirtualStateTransition.Create();
             srcStateTransition.Duration = 3f;
             srcStateTransition.Conditions = srcStateTransition.Conditions.Add(new AnimatorCondition { parameter = "AnotherParam", mode = AnimatorConditionMode.If });
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)srcStateTransition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)srcStateTransition);
             VirtualStateTransition destStateTransition = VirtualStateTransition.Create();
 
-            bool success = VirtualAnimatorClipboard.TryPasteSettingsAndConditions(clipSet, destStateTransition);
+            bool success = VirtualAnimatorCopyEngine.TryPasteSettingsAndConditions(clipSet, destStateTransition);
 
             Assert.IsTrue(success);
             Assert.AreEqual(3f, destStateTransition.Duration);

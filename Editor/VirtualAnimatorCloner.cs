@@ -7,7 +7,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// Virtual Animator関連オブジェクトのクローンを行うエンジンです。

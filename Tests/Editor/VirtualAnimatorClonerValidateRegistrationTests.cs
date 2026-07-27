@@ -3,9 +3,9 @@ using System.Linq;
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClonerValidateRegistrationTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorClonerValidateRegistrationTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void ValidateRegistrationVirtualLayers_DoesNotThrow_ForLayerWithUninitializedOverrides()

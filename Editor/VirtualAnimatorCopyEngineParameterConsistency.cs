@@ -4,14 +4,14 @@ using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// コピーしたオブジェクトが参照しているAnimatorControllerParameterのうち、貼り付け先のVirtualAnimatorControllerに存在しないものを検出します。
     /// </summary>
-    public static class VirtualAnimatorClipboardParameterConsistency
+    public static class VirtualAnimatorCopyEngineParameterConsistency
     {
         /// <summary>
         /// clipSetが参照しているパラメーター名のうち、destControllerに存在しないものを列挙します。

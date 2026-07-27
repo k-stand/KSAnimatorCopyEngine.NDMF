@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorGraphTraversalTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorGraphTraversalTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void ListupObjectsInStateMachine_ReturnsEmptySet_WhenStateMachineIsNull()

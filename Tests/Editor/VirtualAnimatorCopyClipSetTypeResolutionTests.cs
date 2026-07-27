@@ -2,9 +2,9 @@ using System;
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorCopyClipSetTypeResolutionTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyClipSetTypeResolutionTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void SingleLayer_ResolvesToLayers()
@@ -130,7 +130,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             // ブリーフ原文は VirtualAvatarMask.Clone(CloneContext, ScriptableObject.CreateInstance<AvatarMask>())
             // でインスタンスを取得していたが、VirtualAvatarMask のコンストラクタ・Clone ファクトリはいずれも
             // internal であり、nadena.dev.ndmf の Editor アセンブリには本テストアセンブリ
-            // (com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests) 向けの InternalsVisibleTo が
+            // (com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests) 向けの InternalsVisibleTo が
             // 付与されていないため、そのままではコンパイルエラー(CS0122)になる。
             // テストの意図(未登録のVirtualNode派生型がOtherへフォールバックすること)を保ったまま、
             // 公開APIから生成できる別のVirtualNode派生型(VirtualClip)に差し替える。VirtualClipもレジストリに

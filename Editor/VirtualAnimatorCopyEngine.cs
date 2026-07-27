@@ -4,15 +4,15 @@ using System.Collections.Immutable;
 using System.Linq;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// Virtual Animator関連オブジェクトのコピー・貼り付け機能を提供する、このパッケージの主な入口となる静的クラスです。
     /// 各操作にはTry接頭辞を持つ失敗許容版と、失敗時に例外を送出する版が対になって用意されています。
     /// </summary>
-    public static partial class VirtualAnimatorClipboard
+    public static partial class VirtualAnimatorCopyEngine
     {
         /// <summary>
         /// 単一のVirtualLayerをコピーします。

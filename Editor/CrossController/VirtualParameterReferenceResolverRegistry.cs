@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController
 {
     /// <summary>
     /// IVirtualParameterReferenceResolverの登録・解決を行うレジストリです。

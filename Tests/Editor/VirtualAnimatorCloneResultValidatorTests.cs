@@ -5,9 +5,9 @@ using NUnit.Framework;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorCloneResultValidatorTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCloneResultValidatorTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         private sealed class NullChildStubValidator : IVirtualStateMachineBehaviourCloneResultValidator
         {

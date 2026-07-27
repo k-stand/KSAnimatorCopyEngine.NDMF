@@ -5,7 +5,7 @@ using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 using VRC.SDKBase;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.vrchatavatars.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.vrchatavatars.editor.tests
 {
     public class VRCAvatarParameterDriverVirtualParameterReferenceResolverTests
     {

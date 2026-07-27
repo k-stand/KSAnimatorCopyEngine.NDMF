@@ -5,25 +5,25 @@ using NUnit.Framework;
 using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClipboardParameterConsistencyTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyEngineParameterConsistencyTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void FindMissingParameters_ThrowsArgumentNullException_WhenClipSetIsNull()
         {
             VirtualAnimatorController controller = VirtualAnimatorController.Create(CloneContext, "Controller");
-            Assert.Throws<ArgumentNullException>(() => VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(null, controller));
+            Assert.Throws<ArgumentNullException>(() => VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(null, controller));
         }
 
         [Test]
         public void FindMissingParameters_ThrowsArgumentNullException_WhenDestControllerIsNull()
         {
             VirtualStateTransition transition = VirtualStateTransition.Create();
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)transition);
-            Assert.Throws<ArgumentNullException>(() => VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, null));
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)transition);
+            Assert.Throws<ArgumentNullException>(() => VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, null));
         }
 
         [Test]
@@ -34,9 +34,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
 
             VirtualStateTransition transition = VirtualStateTransition.Create();
             transition.Conditions = transition.Conditions.Add(new AnimatorCondition { mode = AnimatorConditionMode.Greater, threshold = 0f, parameter = "Speed" });
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)transition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)transition);
 
-            IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+            IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
             Assert.IsEmpty(missing);
         }
@@ -48,9 +48,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
 
             VirtualStateTransition transition = VirtualStateTransition.Create();
             transition.Conditions = transition.Conditions.Add(new AnimatorCondition { mode = AnimatorConditionMode.Greater, threshold = 0f, parameter = "Speed" });
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)transition);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)transition);
 
-            IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+            IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
             CollectionAssert.AreEquivalent(new[] { "Speed" }, missing);
         }
@@ -68,9 +68,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             childStateMachine.EntryTransitions = childStateMachine.EntryTransitions.Add(entryTransition);
 
             VirtualStateMachine.VirtualChildStateMachine childVirtualStateMachine = new() { StateMachine = childStateMachine };
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)childVirtualStateMachine);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)childVirtualStateMachine);
 
-            IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+            IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
             CollectionAssert.AreEquivalent(new[] { "Grounded" }, missing);
         }
@@ -83,9 +83,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             VirtualState state = VirtualState.Create("State1");
             state.Behaviours = state.Behaviours.Add(behaviour);
             VirtualStateMachine.VirtualChildState childState = new() { State = state };
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)childState);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)childState);
 
-            IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+            IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
             Assert.IsEmpty(missing);
         }
@@ -101,9 +101,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
                 VirtualState state = VirtualState.Create("State1");
                 state.Behaviours = state.Behaviours.Add(behaviour);
                 VirtualStateMachine.VirtualChildState childState = new() { State = state };
-                VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)childState);
+                VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)childState);
 
-                IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+                IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
                 CollectionAssert.AreEquivalent(new[] { "StubParam" }, missing);
             }
@@ -122,9 +122,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             transition1.Conditions = transition1.Conditions.Add(new AnimatorCondition { mode = AnimatorConditionMode.Greater, threshold = 0f, parameter = "Speed" });
             VirtualStateTransition transition2 = VirtualStateTransition.Create();
             transition2.Conditions = transition2.Conditions.Add(new AnimatorCondition { mode = AnimatorConditionMode.Less, threshold = 1f, parameter = "Speed" });
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(new object[] { transition1, transition2 });
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(new object[] { transition1, transition2 });
 
-            IReadOnlyList<string> missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller);
+            IReadOnlyList<string> missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller);
 
             CollectionAssert.AreEquivalent(new[] { "Speed" }, missing);
         }
@@ -141,10 +141,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             rootStateMachine.StateMachines = rootStateMachine.StateMachines.Add(new VirtualStateMachine.VirtualChildStateMachine());
 
             VirtualStateMachine.VirtualChildStateMachine rootVirtualStateMachine = new() { StateMachine = rootStateMachine };
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)rootVirtualStateMachine);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)rootVirtualStateMachine);
 
             IReadOnlyList<string> missing = null;
-            Assert.DoesNotThrow(() => missing = VirtualAnimatorClipboardParameterConsistency.FindMissingParameters(clipSet, controller));
+            Assert.DoesNotThrow(() => missing = VirtualAnimatorCopyEngineParameterConsistency.FindMissingParameters(clipSet, controller));
             Assert.IsEmpty(missing);
         }
 

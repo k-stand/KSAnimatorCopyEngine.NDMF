@@ -3,18 +3,18 @@ using NUnit.Framework;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClipboardTryPasteTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyEngineTryPasteTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void TryPasteLayers_ReturnsFalse_WhenClipSetTypeMismatches()
         {
             VirtualState state = VirtualState.Create("State1");
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)state);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)state);
             VirtualAnimatorController destController = VirtualAnimatorController.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteLayers(clipSet, destController, CloneContext, out VirtualLayer[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteLayers(clipSet, destController, CloneContext, out VirtualLayer[] result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -27,10 +27,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             VirtualLayer layer = VirtualLayer.Create(CloneContext, "Layer1");
             layer.StateMachine = sm;
             VirtualAnimatorController parentController = VirtualAnimatorController.Create(CloneContext, "Controller");
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(layer, parentController);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(layer, parentController);
             VirtualStateMachine destStateMachine = VirtualStateMachine.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -40,10 +40,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         public void PasteLayers_StillThrows_WhenClipSetTypeMismatches()
         {
             VirtualState state = VirtualState.Create("State1");
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)state);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)state);
             VirtualAnimatorController destController = VirtualAnimatorController.Create(CloneContext, "Dest");
 
-            Assert.Throws<VirtualAnimatorCopyClipSetTypeMismatchException>(() => VirtualAnimatorClipboard.PasteLayers(clipSet, destController, CloneContext));
+            Assert.Throws<VirtualAnimatorCopyClipSetTypeMismatchException>(() => VirtualAnimatorCopyEngine.PasteLayers(clipSet, destController, CloneContext));
         }
 
         [Test]
@@ -53,10 +53,10 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             VirtualLayer layer = VirtualLayer.Create(CloneContext, "Layer1");
             layer.StateMachine = sm;
             VirtualAnimatorController parentController = VirtualAnimatorController.Create(CloneContext, "Controller");
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(layer, parentController);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(layer, parentController);
             VirtualAnimatorController destController = VirtualAnimatorController.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteLayers(clipSet, destController, CloneContext, out VirtualLayer[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteLayers(clipSet, destController, CloneContext, out VirtualLayer[] result);
 
             Assert.IsTrue(success);
             Assert.AreEqual(1, result.Length);
@@ -71,11 +71,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             VirtualState state = VirtualState.Create("State1");
             VirtualStateMachine.VirtualChildState childState = new() { State = state };
             VirtualTransition transition = VirtualTransition.Create();
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy(new object[] { childState, transition });
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy(new object[] { childState, transition });
 
             VirtualStateMachine destStateMachine = VirtualStateMachine.Create(CloneContext, "Dest");
 
-            bool success = VirtualAnimatorClipboard.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
 
             Assert.IsTrue(success);
             Assert.IsNotNull(result);
@@ -96,9 +96,9 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             selfTransition.SetDestination(state);
             state.Transitions = state.Transitions.Add(selfTransition);
 
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)state, ancestorStateMachine);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)state, ancestorStateMachine);
 
-            bool success = VirtualAnimatorClipboard.TryPasteIntoStateMachine(clipSet, ancestorStateMachine, CloneContext, out object[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteIntoStateMachine(clipSet, ancestorStateMachine, CloneContext, out object[] result);
 
             Assert.IsTrue(success);
             Assert.IsNotNull(result);
@@ -121,7 +121,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         //   IsExitもfalse(VirtualTransition.Create()直後のデフォルト、NDMF VirtualTransitionBase.cs参照)に
         //   なり、TryPasteIntoStateMachine内の「Transition先が設定できていないなら」ガード(早期continue)に
         //   該当してしまい、EntryTransitionsへの追加処理へ到達する前にスキップされる。
-        // 生API版AnimatorClipboard.cs(456-460行目)・TransitionCopyObjectKind.cs・AnimatorCloner.csの
+        // 生API版AnimatorCopyEngine.cs(456-460行目)・TransitionCopyObjectKind.cs・AnimatorCloner.csの
         // RegisterChildrenRecursivelyも全く同一の構造であり、これはVirtual版固有の不具合ではなく、
         // 生API版から忠実に移植した結果そのまま再現された生API版自体の挙動特性である
         // (詳細はtask-9-report.md参照)。そのため貼り付け先は、DestinationStateが解決可能な
@@ -136,12 +136,12 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             entryTransition.SetDestination(state);
             ancestorStateMachine.EntryTransitions = ancestorStateMachine.EntryTransitions.Add(entryTransition);
 
-            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorClipboard.Copy((object)entryTransition, ancestorStateMachine);
+            VirtualAnimatorCopyClipSet clipSet = VirtualAnimatorCopyEngine.Copy((object)entryTransition, ancestorStateMachine);
 
             VirtualStateMachine destStateMachine = VirtualStateMachine.Create(CloneContext, "Dest");
             ancestorStateMachine.StateMachines = ancestorStateMachine.StateMachines.Add(new VirtualStateMachine.VirtualChildStateMachine { StateMachine = destStateMachine });
 
-            bool success = VirtualAnimatorClipboard.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
+            bool success = VirtualAnimatorCopyEngine.TryPasteIntoStateMachine(clipSet, destStateMachine, CloneContext, out object[] result);
 
             Assert.IsTrue(success);
             // destStateMachineはancestorStateMachineの子孫(同一祖先スコープ内)なので、entryTransitionの

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     // コピー範囲(IVirtualAnimatorCopyObjectKind.GetCloneScope)を求めるための、VirtualStateMachine配下
     // オブジェクトの列挙。同じくグラフを辿るVirtualAnimatorGraphSchemaとは用途が異なるため列挙範囲も異なる:

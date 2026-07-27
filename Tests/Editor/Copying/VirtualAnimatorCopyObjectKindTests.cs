@@ -2,12 +2,12 @@ using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests.Copying
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests.Copying
 {
-    public class VirtualAnimatorCopyObjectKindTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyObjectKindTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void VirtualLayerCopyObjectKind_HasExpectedProperties()

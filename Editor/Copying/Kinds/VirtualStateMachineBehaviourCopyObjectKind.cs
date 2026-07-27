@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying
 {
     internal sealed class VirtualStateMachineBehaviourCopyObjectKind : IVirtualAnimatorCopyObjectKind
     {

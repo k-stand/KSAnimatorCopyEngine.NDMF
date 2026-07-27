@@ -1,10 +1,9 @@
 {
-    "name": "com.github.k_stand.ksanimatorclipboard.ndmf.vrchatavatars.editor.tests",
+    "name": "com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests",
     "rootNamespace": "",
     "references": [
         "com.github.k_stand.ksanimatorcopyengine.editor",
-        "com.github.k_stand.ksanimatorclipboard.ndmf.editor",
-        "com.github.k_stand.ksanimatorclipboard.ndmf.vrchatavatars.editor",
+        "com.github.k_stand.ksanimatorcopyengine.ndmf.editor",
         "nadena.dev.ndmf"
     ],
     "includePlatforms": [
@@ -15,9 +14,7 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "System.Collections.Immutable.dll",
-        "VRCSDKBase.dll",
-        "VRCSDK3A.dll"
+        "System.Collections.Immutable.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],

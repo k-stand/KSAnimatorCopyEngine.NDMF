@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorCopyClipSetAncestorTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyClipSetAncestorTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void Layer_ContainedInParentController_IsNotAncestorMismatched()
@@ -71,7 +71,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             });
 
             VirtualAnimatorCopyClipSet clipSet = null;
-            Assert.DoesNotThrow(() => clipSet = VirtualAnimatorClipboard.Copy((object)state, ancestorStateMachine));
+            Assert.DoesNotThrow(() => clipSet = VirtualAnimatorCopyEngine.Copy((object)state, ancestorStateMachine));
 
             Assert.IsNotNull(clipSet);
             Assert.IsFalse(clipSet.IsAncestorMismatched);

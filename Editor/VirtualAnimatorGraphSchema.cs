@@ -4,7 +4,7 @@ using System.Linq;
 using nadena.dev.ndmf.animator;
 using UnityEngine;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     // VirtualNodeグラフの「形」(どのノードがどの子を持つか)を1箇所に集約する。
     // VirtualAnimatorCloner.ValidateRegistration*とVirtualAnimatorCloneResultValidator.Validate*CloneResultが

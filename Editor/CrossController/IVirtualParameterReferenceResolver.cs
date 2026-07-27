@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController
 {
     /// <summary>
     /// StateMachineBehaviourの具象型ごとに、そのBehaviourが参照しているAnimatorControllerParameter名を取得するための拡張ポイントです。
