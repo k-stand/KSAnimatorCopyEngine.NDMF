@@ -18,9 +18,14 @@ VRChat Avatars SDK固有の型(`VRCAvatarParameterDriver`)への対応は標準�
 `VRCAvatarParameterDriver`が参照するパラメーターは、パラメーター整合性チェック(`VirtualAnimatorCopyEngineParameterConsistency`)の対象に含まれます。
 
 ## インストール
-現時点ではVCC(ALCOM)向けのリポジトリ登録・unitypackage配布は行っていません。
-`com.github.k-stand.ksanimatorcopyengine.ndmf`に依存する他パッケージ経由で導入するか、
-このプロジェクトの`Packages`フォルダを直接参照して利用してください。
+### VCC(ALCOM)を利用する方法
+1. https://k-stand.github.io/vpm-repos/ の`Add to VCC`を押してVCCにリポジトリを追加します。
+2. 導入したいプロジェクトに`KS Animator Copy Engine`をインストールしてください。
+
+### VPAI unitypackageでVCCにインストールする方法
+1. 以下から任意のバージョンの`com.github.k-stand.ksanimatorcopyengine.ndmf.X.x.x-installer.unitypackage`をダウンロードして、導入したいプロジェクトにインポートしてください。
+
+0.x.x : [com.github.k-stand.ksanimatorcopyengine.ndmf.0.x.x-installer.unitypackage](https://github.com/k-stand/KSAnimatorCopyEngine.NDMF/releases/download/0.3.0/com.github.k-stand.ksanimatorcopyengine.0.x.x-installer.unitypackage)
 
 ## 使用方法
 ```csharp
@@ -53,6 +58,7 @@ VirtualAnimatorCopyEngine.PasteIntoStateMachine(cloned, destStateMachine, cloneC
 - パッケージを`com.github.k-stand.ksanimatorclipboard.ndmf`から`com.github.k-stand.ksanimatorcopyengine.ndmf`へ改名(破壊的変更)。コアパッケージ(`com.github.k-stand.ksanimatorcopyengine`)の改名に伴うものです
 - エントリーポイントクラス`VirtualAnimatorClipboard`を`VirtualAnimatorCopyEngine`に、`VirtualAnimatorClipboardParameterConsistency`を`VirtualAnimatorCopyEngineParameterConsistency`にリネーム(破壊的変更)
 - namespace・asmdef名を`com.github.k_stand.ksanimatorclipboard.ndmf.*`から`com.github.k_stand.ksanimatorcopyengine.ndmf.*`に変更(破壊的変更)
+- GitHubにて公開
 
 ### [2026-07-26] 0.2.0
 - `com.github.k-stand.ksanimatorclipboard.ndmf.vrchatavatars`パッケージを廃止し、VRChatAvatars対応(`VRCAvatarParameterDriver`)を`Editor/VRChatAvatars`モジュールとして標準同梱(破壊的変更、`com.vrchat.avatars`が新たに必須の依存関係になります)
