@@ -49,6 +49,11 @@ VirtualAnimatorCopyEngine.PasteIntoStateMachine(cloned, destStateMachine, cloneC
 [MIT License](https://github.com/k-stand/KSAnimatorClipboard/blob/main/LICENSE.txt)
 
 ## 更新履歴
+### [2026-07-28] 0.3.0
+- パッケージを`com.github.k-stand.ksanimatorclipboard.ndmf`から`com.github.k-stand.ksanimatorcopyengine.ndmf`へ改名(破壊的変更)。コアパッケージ(`com.github.k-stand.ksanimatorcopyengine`)の改名に伴うものです
+- エントリーポイントクラス`VirtualAnimatorClipboard`を`VirtualAnimatorCopyEngine`に、`VirtualAnimatorClipboardParameterConsistency`を`VirtualAnimatorCopyEngineParameterConsistency`にリネーム(破壊的変更)
+- namespace・asmdef名を`com.github.k_stand.ksanimatorclipboard.ndmf.*`から`com.github.k_stand.ksanimatorcopyengine.ndmf.*`に変更(破壊的変更)
+
 ### [2026-07-26] 0.2.0
 - `com.github.k-stand.ksanimatorclipboard.ndmf.vrchatavatars`パッケージを廃止し、VRChatAvatars対応(`VRCAvatarParameterDriver`)を`Editor/VRChatAvatars`モジュールとして標準同梱(破壊的変更、`com.vrchat.avatars`が新たに必須の依存関係になります)
 - `IVirtualParameterReferenceResolver`/`VirtualParameterReferenceResolverRegistry`を`public`から`internal`に変更(外部パッケージからの拡張は不可に。破壊的変更)

@@ -1,7 +1,7 @@
 {
     "name": "com.github.k-stand.ksanimatorcopyengine.ndmf",
     "displayName": "KS Animator Copy Engine (NDMF)",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "unity": "2022.3",
     "description": "KS Animator Copy EngineのNDMF Virtual Animator API(nadena.dev.ndmf.animator)対応版",
     "author": {
