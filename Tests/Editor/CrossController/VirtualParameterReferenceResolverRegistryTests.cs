@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests.CrossController
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests.CrossController
 {
     public class VirtualParameterReferenceResolverRegistryTests
     {
@@ -62,7 +62,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests.CrossControll
         }
 
         [Test]
-        public void Shared_HasNoResolversRegisteredByDefault()
+        public void Shared_ReturnsNull_ForUnregisteredType()
         {
             Assert.IsNull(VirtualParameterReferenceResolverRegistry.Shared.Resolve(typeof(DummyStateMachineBehaviour)));
         }

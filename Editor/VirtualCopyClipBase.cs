@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// コピー対象のVirtualNode(または構造体)と、貼り付け時に必要な付随情報(コンテキスト)を保持する基底クラスです。

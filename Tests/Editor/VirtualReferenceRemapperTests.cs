@@ -3,9 +3,9 @@ using System.Collections.Immutable;
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualReferenceRemapperTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualReferenceRemapperTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void RemappingRecursively_UnifiesDuplicateBlendTreeClones_FromIndependentCloneOperations()

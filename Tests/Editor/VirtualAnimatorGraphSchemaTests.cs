@@ -3,9 +3,9 @@ using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 using UnityEngine;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorGraphSchemaTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorGraphSchemaTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void GetChildren_VirtualAnimatorController_ListsAllLayers()

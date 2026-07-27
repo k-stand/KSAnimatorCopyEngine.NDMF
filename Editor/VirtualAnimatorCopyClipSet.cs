@@ -5,12 +5,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
-    /// VirtualAnimatorClipboard.Copy系メソッドの戻り値として、コピーされたVirtual Animator関連オブジェクトの集合を保持します。
+    /// VirtualAnimatorCopyEngine.Copy系メソッドの戻り値として、コピーされたVirtual Animator関連オブジェクトの集合を保持します。
     /// </summary>
     public sealed partial class VirtualAnimatorCopyClipSet
     {
@@ -35,11 +35,13 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
 
         /// <summary>
         /// Layers種別でコピーされた場合の、コピー元レイヤーが属していた親VirtualAnimatorControllerを取得します。
+        /// レイヤーが指定された親VirtualAnimatorControllerに含まれていなかった場合や、Layers種別以外の場合はnullになります。
         /// </summary>
         public VirtualAnimatorController ParentController { get; private set; }
 
         /// <summary>
         /// VirtualStateMachine配下のオブジェクトとしてコピーされた場合の、コピー元の共通の祖先VirtualStateMachineを取得します。
+        /// コピー対象が指定された祖先の子孫でなかった場合や、対象外の種別の場合はnullになります。
         /// </summary>
         public VirtualStateMachine AncestorStateMachine { get; private set; }
 

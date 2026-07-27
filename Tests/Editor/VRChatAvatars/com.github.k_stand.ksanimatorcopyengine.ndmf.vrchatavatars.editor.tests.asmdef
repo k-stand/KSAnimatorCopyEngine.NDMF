@@ -1,0 +1,29 @@
+{
+    "name": "com.github.k_stand.ksanimatorcopyengine.ndmf.vrchatavatars.editor.tests",
+    "rootNamespace": "",
+    "references": [
+        "com.github.k_stand.ksanimatorcopyengine.editor",
+        "com.github.k_stand.ksanimatorcopyengine.ndmf.editor",
+        "com.github.k_stand.ksanimatorcopyengine.ndmf.vrchatavatars.editor",
+        "nadena.dev.ndmf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "System.Collections.Immutable.dll",
+        "VRCSDKBase.dll",
+        "VRCSDK3A.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

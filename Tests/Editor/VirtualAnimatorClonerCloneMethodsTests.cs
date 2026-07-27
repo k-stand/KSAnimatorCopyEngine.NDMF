@@ -4,9 +4,9 @@ using NUnit.Framework;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClonerCloneMethodsTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorClonerCloneMethodsTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void CloneVirtualState_ReturnsDistinctClone_WithoutOutParam()

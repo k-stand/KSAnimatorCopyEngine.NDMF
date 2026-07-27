@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorNormalizationTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorNormalizationTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void NormalizeAnyStateTransitions_HoistsNestedAnyStateTransitionsToTopLevel()

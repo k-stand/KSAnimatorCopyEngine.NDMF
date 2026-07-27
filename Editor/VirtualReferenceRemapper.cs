@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// クローンされたオブジェクトから複製元オブジェクトを逆引きできるようにし、複製後に新規生成されたVirtualClip/VirtualBlendTreeへの
@@ -16,6 +16,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualAnimatorCloner.GetClonedMap()等で得られる複製元→複製後のマップを、逆方向(複製後→複製元)で登録します。
         /// </summary>
+        /// <param name="orig2CloneMap">複製元オブジェクトをキー、複製後オブジェクトを値とするマップ。</param>
         public void AddClonedMap(IReadOnlyDictionary<object, object> orig2CloneMap)
         {
             foreach (KeyValuePair<object, object> pair in orig2CloneMap)
@@ -27,11 +28,14 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 登録済みの複製後→複製元マップのコピーを取得します。
         /// </summary>
+        /// <returns>複製後オブジェクトをキー、複製元オブジェクトを値とするマップ。</returns>
         public Dictionary<object, object> GetAllClonedMap() => new(_cloneToOrigMap);
 
         /// <summary>
         /// 登録済みマップを複製元方向へ辿り、指定したオブジェクトの最も根本にある複製元オブジェクトを取得します。
         /// </summary>
+        /// <param name="obj">辿り始めるオブジェクト。</param>
+        /// <returns>最終的に辿り着いた複製元オブジェクト。マップに登録がない場合はobj自身を返します。</returns>
         public object GetOrigRoot(object obj)
         {
             HashSet<object> visited = new();
@@ -51,12 +55,14 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 指定したオブジェクトが持つVirtualClip/VirtualBlendTree等の参照を再帰的に辿り、登録済みマップに基づいて新しいオブジェクトへ付け替えます。
         /// </summary>
+        /// <param name="obj">参照の付け替えを行う対象オブジェクト。</param>
         public void RemappingRecursively(object obj) => RemappingRecursivelyInternal(obj, new RemapperContext());
 
         /// <summary>
         /// 複数のオブジェクトに対してまとめてRemappingRecursivelyを行います。処理コンテキストを共有するため、
         /// 対象オブジェクト間で同名の付け替え先が重複して生成されることを防ぎます。
         /// </summary>
+        /// <param name="objs">参照の付け替えを行う対象オブジェクトの列挙。</param>
         public void RemappingRecursively(IEnumerable<object> objs)
         {
             RemapperContext context = new();

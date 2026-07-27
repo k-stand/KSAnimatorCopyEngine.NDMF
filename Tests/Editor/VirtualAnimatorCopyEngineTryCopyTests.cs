@@ -3,16 +3,16 @@ using NUnit.Framework;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests
 {
-    public class VirtualAnimatorClipboardTryCopyTests : VirtualAnimatorClipboardTestFixtureBase
+    public class VirtualAnimatorCopyEngineTryCopyTests : VirtualAnimatorCopyEngineTestFixtureBase
     {
         [Test]
         public void TryCopy_Layers_ReturnsFalse_WhenGivenEmptyCollection()
         {
             VirtualAnimatorController parentController = VirtualAnimatorController.Create(CloneContext, "Controller");
 
-            bool success = VirtualAnimatorClipboard.TryCopy(Array.Empty<VirtualLayer>(), parentController, out VirtualAnimatorCopyClipSet result);
+            bool success = VirtualAnimatorCopyEngine.TryCopy(Array.Empty<VirtualLayer>(), parentController, out VirtualAnimatorCopyClipSet result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -23,7 +23,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualStateMachine ancestorStateMachine = VirtualStateMachine.Create(CloneContext, "Root");
 
-            bool success = VirtualAnimatorClipboard.TryCopy(Array.Empty<object>(), ancestorStateMachine, out VirtualAnimatorCopyClipSet result);
+            bool success = VirtualAnimatorCopyEngine.TryCopy(Array.Empty<object>(), ancestorStateMachine, out VirtualAnimatorCopyClipSet result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -32,7 +32,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         [Test]
         public void TryCopy_Behaviours_ReturnsFalse_WhenGivenEmptyCollection()
         {
-            bool success = VirtualAnimatorClipboard.TryCopy(Array.Empty<StateMachineBehaviour>(), out VirtualAnimatorCopyClipSet result);
+            bool success = VirtualAnimatorCopyEngine.TryCopy(Array.Empty<StateMachineBehaviour>(), out VirtualAnimatorCopyClipSet result);
 
             Assert.IsFalse(success);
             Assert.IsNull(result);
@@ -46,7 +46,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
             layer.StateMachine = sm;
             VirtualAnimatorController parentController = VirtualAnimatorController.Create(CloneContext, "Controller");
 
-            bool success = VirtualAnimatorClipboard.TryCopy(layer, parentController, out VirtualAnimatorCopyClipSet result);
+            bool success = VirtualAnimatorCopyEngine.TryCopy(layer, parentController, out VirtualAnimatorCopyClipSet result);
 
             Assert.IsTrue(success);
             Assert.IsNotNull(result);
@@ -58,7 +58,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualAnimatorController parentController = VirtualAnimatorController.Create(CloneContext, "Controller");
 
-            Assert.Throws<ArgumentException>(() => VirtualAnimatorClipboard.Copy(Array.Empty<VirtualLayer>(), parentController));
+            Assert.Throws<ArgumentException>(() => VirtualAnimatorCopyEngine.Copy(Array.Empty<VirtualLayer>(), parentController));
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             StateMachineBehaviour behaviour = ScriptableObject.CreateInstance<DummyStateMachineBehaviour>();
 
-            bool success = VirtualAnimatorClipboard.TryCopy(behaviour, out VirtualAnimatorCopyClipSet result);
+            bool success = VirtualAnimatorCopyEngine.TryCopy(behaviour, out VirtualAnimatorCopyClipSet result);
 
             Assert.IsTrue(success);
             Assert.AreEqual(VirtualAnimatorCopyClipSet.VirtualAnimatorCopyClipSetType.Behaviours, result.Type);
@@ -77,7 +77,7 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests
         {
             VirtualState state = VirtualState.Create("State1");
 
-            VirtualAnimatorCopyClipSet result = VirtualAnimatorClipboard.Copy((object)state);
+            VirtualAnimatorCopyClipSet result = VirtualAnimatorCopyEngine.Copy((object)state);
 
             Assert.AreEqual(VirtualAnimatorCopyClipSet.VirtualAnimatorCopyClipSetType.ChildState, result.Type);
         }

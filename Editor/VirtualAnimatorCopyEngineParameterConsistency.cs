@@ -4,20 +4,24 @@ using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.CrossController;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.CrossController;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// コピーしたオブジェクトが参照しているAnimatorControllerParameterのうち、貼り付け先のVirtualAnimatorControllerに存在しないものを検出します。
     /// </summary>
-    public static class VirtualAnimatorClipboardParameterConsistency
+    public static class VirtualAnimatorCopyEngineParameterConsistency
     {
         /// <summary>
         /// clipSetが参照しているパラメーター名のうち、destControllerに存在しないものを列挙します。
-        /// StateMachineBehaviourが参照するパラメーターは、VirtualParameterReferenceResolverRegistry経由で登録されたresolverを経由して収集されます
-        /// (未登録の型は参照なしとして扱われます)。
+        /// StateMachineBehaviourが参照するパラメーターは、本パッケージ内部で固定登録されたresolver(現状VRCAvatarParameterDriver)を
+        /// 経由して収集されます(未登録の型は参照なしとして扱われます)。
         /// </summary>
+        /// <param name="clipSet">検証対象のVirtualAnimatorCopyClipSet。</param>
+        /// <param name="destController">存在確認の基準にする貼り付け先のVirtualAnimatorController。</param>
+        /// <returns>destControllerに存在しないパラメーター名の一覧。</returns>
+        /// <exception cref="ArgumentNullException">clipSetまたはdestControllerがnullの場合。</exception>
         public static IReadOnlyList<string> FindMissingParameters(VirtualAnimatorCopyClipSet clipSet, VirtualAnimatorController destController)
         {
             if (clipSet == null) throw new ArgumentNullException(nameof(clipSet));

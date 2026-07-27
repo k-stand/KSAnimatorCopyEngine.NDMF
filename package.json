@@ -1,17 +1,18 @@
 {
-    "name": "com.github.k-stand.ksanimatorclipboard.ndmf",
-    "displayName": "KS Animator Clipboard (NDMF)",
-    "version": "0.1.0",
+    "name": "com.github.k-stand.ksanimatorcopyengine.ndmf",
+    "displayName": "KS Animator Copy Engine (NDMF)",
+    "version": "0.3.0",
     "unity": "2022.3",
-    "description": "KS Animator ClipboardのNDMF Virtual Animator API(nadena.dev.ndmf.animator)対応版",
+    "description": "KS Animator Copy EngineのNDMF Virtual Animator API(nadena.dev.ndmf.animator)対応版",
     "author": {
         "name": "k-stand",
-        "url": "https://github.com/k-stand/KSAnimatorClipboard"
+        "url": "https://github.com/k-stand/KSAnimatorCopyEngine.NDMF"
     },
     "license": "MIT",
     "url": "",
     "vpmDependencies": {
-        "com.github.k-stand.ksanimatorclipboard": ">=0.5.0",
-        "nadena.dev.ndmf": ">=1.14.0"
+        "com.github.k-stand.ksanimatorcopyengine": ">=0.7.0",
+        "nadena.dev.ndmf": ">=1.14.0",
+        "com.vrchat.avatars": ">=3.0.0"
     }
 }

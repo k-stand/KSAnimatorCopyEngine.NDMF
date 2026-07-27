@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// クローン結果のVirtual Animator関連オブジェクトが、本来クローンされているべき箇所にnull参照を持っていないかを検証します。

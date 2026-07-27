@@ -1,0 +1,26 @@
+{
+    "name": "com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests",
+    "rootNamespace": "",
+    "references": [
+        "com.github.k_stand.ksanimatorcopyengine.editor",
+        "com.github.k_stand.ksanimatorcopyengine.ndmf.editor",
+        "nadena.dev.ndmf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "System.Collections.Immutable.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

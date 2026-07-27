@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor;
-using com.github.k_stand.ksanimatorclipboard.ndmf.editor.Copying;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor;
+using com.github.k_stand.ksanimatorcopyengine.ndmf.editor.Copying;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor.tests.Copying
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor.tests.Copying
 {
     public class VirtualAnimatorCopyClipSetTypeExtensionsTests
     {

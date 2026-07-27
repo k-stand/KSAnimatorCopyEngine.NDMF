@@ -7,7 +7,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using nadena.dev.ndmf.animator;
 
-namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
+namespace com.github.k_stand.ksanimatorcopyengine.ndmf.editor
 {
     /// <summary>
     /// Virtual Animator関連オブジェクトのクローンを行うエンジンです。
@@ -288,16 +288,24 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// オブジェクトの実際の型を判定してクローンします。CloneableTypesに含まれない型の場合はnullを返します。
         /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public object CloneObject(object orig) => CloneObject(orig, out _);
 
         /// <summary>
         /// オブジェクトの実際の型を判定してクローンします。CloneableTypesに含まれない型の場合はnullを返します。
         /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public object CloneObject(object orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneObjectInternal, out clonedMap);
 
         /// <summary>
         /// オブジェクトの実際の型を判定してクローンを試みます。
         /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <param name="clone">成功した場合はクローンされたオブジェクト、失敗した場合はnull。</param>
+        /// <returns>origがnullでなく、かつCloneableTypesに含まれる型でクローンに成功した場合はtrue。</returns>
         public bool TryCloneObject(object orig, out object clone)
         {
             object tempClone;
@@ -332,8 +340,16 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualAnimatorControllerをクローンします。Parameters/Layersを含め再帰的に複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualAnimatorController。</param>
+        /// <returns>クローンされたVirtualAnimatorController。</returns>
         public VirtualAnimatorController CloneVirtualAnimatorController(VirtualAnimatorController orig) => CloneVirtualAnimatorController(orig, out _);
 
+        /// <summary>
+        /// VirtualAnimatorControllerをクローンします。Parameters/Layersを含め再帰的に複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualAnimatorController。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualAnimatorController。</returns>
         public VirtualAnimatorController CloneVirtualAnimatorController(VirtualAnimatorController orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualAnimatorControllerInternal, out clonedMap);
 
         private VirtualAnimatorController CloneVirtualAnimatorControllerInternal(VirtualAnimatorController orig)
@@ -353,6 +369,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のAnimatorControllerParameterをまとめてクローンします。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた配列。</returns>
         public AnimatorControllerParameter[] CloneAnimatorControllerParameters(IEnumerable<AnimatorControllerParameter> origs)
         {
             return origs.Select(orig => CloneAnimatorControllerParameter(orig)).ToArray();
@@ -361,6 +379,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// AnimatorControllerParameterをクローンします。
         /// </summary>
+        /// <param name="orig">クローン元のAnimatorControllerParameter。</param>
+        /// <returns>クローンされたAnimatorControllerParameter。</returns>
         public AnimatorControllerParameter CloneAnimatorControllerParameter(AnimatorControllerParameter orig)
         {
             return new()
@@ -375,16 +395,36 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
 
         /// <summary>
         /// 複数のVirtualLayerをまとめてクローンします。
+        /// レイヤー自体は常に新規クローンされます(ClonePolicyの対象外)。内部のStateMachine以下はClonePolicyに従います。
         /// </summary>
+        /// <param name="origs">クローン元のレイヤーの列挙。</param>
+        /// <returns>クローンされたレイヤーの列挙。</returns>
         public IEnumerable<VirtualLayer> CloneVirtualLayers(IEnumerable<VirtualLayer> origs) => CloneVirtualLayers(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualLayerをまとめてクローンします。
+        /// レイヤー自体は常に新規クローンされます(ClonePolicyの対象外)。内部のStateMachine以下はClonePolicyに従います。
+        /// </summary>
+        /// <param name="origs">クローン元のレイヤーの列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたレイヤーの列挙。</returns>
         public IEnumerable<VirtualLayer> CloneVirtualLayers(IEnumerable<VirtualLayer> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualLayersInternal, out clonedMap);
 
         /// <summary>
         /// VirtualLayerをクローンします。StateMachineを含め再帰的に複製されます。
+        /// レイヤー自体は常に新規クローンされます(ClonePolicyの対象外)。内部のStateMachine以下はClonePolicyに従います。
         /// </summary>
+        /// <param name="orig">クローン元のレイヤー。</param>
+        /// <returns>クローンされたレイヤー。</returns>
         public VirtualLayer CloneVirtualLayer(VirtualLayer orig) => CloneVirtualLayer(orig, out _);
 
+        /// <summary>
+        /// VirtualLayerをクローンします。StateMachineを含め再帰的に複製されます。
+        /// レイヤー自体は常に新規クローンされます(ClonePolicyの対象外)。内部のStateMachine以下はClonePolicyに従います。
+        /// </summary>
+        /// <param name="orig">クローン元のレイヤー。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたレイヤー。</returns>
         public VirtualLayer CloneVirtualLayer(VirtualLayer orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualLayerInternal, out clonedMap);
 
         private ImmutableList<VirtualLayer> CloneVirtualLayersInternal(IEnumerable<VirtualLayer> origs)
@@ -447,12 +487,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualChildStateMachineをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateMachine.VirtualChildStateMachine> CloneVirtualChildStateMachines(IEnumerable<VirtualStateMachine.VirtualChildStateMachine> origs) => CloneVirtualChildStateMachines(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualChildStateMachineをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateMachine.VirtualChildStateMachine> CloneVirtualChildStateMachines(IEnumerable<VirtualStateMachine.VirtualChildStateMachine> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualChildStateMachinesInternal, out clonedMap);
 
+        /// <summary>
+        /// VirtualChildStateMachineをクローンします。
+        /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public VirtualStateMachine.VirtualChildStateMachine CloneVirtualChildStateMachine(VirtualStateMachine.VirtualChildStateMachine orig) => CloneVirtualChildStateMachine(orig, out _);
 
+        /// <summary>
+        /// VirtualChildStateMachineをクローンします。
+        /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public VirtualStateMachine.VirtualChildStateMachine CloneVirtualChildStateMachine(VirtualStateMachine.VirtualChildStateMachine orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualChildStateMachineInternal, out clonedMap);
 
         private ImmutableList<VirtualStateMachine.VirtualChildStateMachine> CloneVirtualChildStateMachinesInternal(IEnumerable<VirtualStateMachine.VirtualChildStateMachine> origs)
@@ -472,8 +531,16 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateMachineをクローンします。States/StateMachines/Transitions/Behaviours等を含め再帰的に複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualStateMachine。</param>
+        /// <returns>クローンされたVirtualStateMachine。</returns>
         public VirtualStateMachine CloneVirtualStateMachine(VirtualStateMachine orig) => CloneVirtualStateMachine(orig, out _);
 
+        /// <summary>
+        /// VirtualStateMachineをクローンします。States/StateMachines/Transitions/Behaviours等を含め再帰的に複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualStateMachine。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualStateMachine。</returns>
         public VirtualStateMachine CloneVirtualStateMachine(VirtualStateMachine orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualStateMachineInternal, out clonedMap);
 
         private VirtualStateMachine CloneVirtualStateMachineInternal(VirtualStateMachine orig)
@@ -519,12 +586,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualChildStateをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateMachine.VirtualChildState> CloneVirtualChildStates(IEnumerable<VirtualStateMachine.VirtualChildState> origs) => CloneVirtualChildStates(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualChildStateをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateMachine.VirtualChildState> CloneVirtualChildStates(IEnumerable<VirtualStateMachine.VirtualChildState> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualChildStatesInternal, out clonedMap);
 
+        /// <summary>
+        /// VirtualChildStateをクローンします。
+        /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public VirtualStateMachine.VirtualChildState CloneVirtualChildState(VirtualStateMachine.VirtualChildState orig) => CloneVirtualChildState(orig, out _);
 
+        /// <summary>
+        /// VirtualChildStateをクローンします。
+        /// </summary>
+        /// <param name="orig">クローン元のオブジェクト。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたオブジェクト。</returns>
         public VirtualStateMachine.VirtualChildState CloneVirtualChildState(VirtualStateMachine.VirtualChildState orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualChildStateInternal, out clonedMap);
 
         private ImmutableList<VirtualStateMachine.VirtualChildState> CloneVirtualChildStatesInternal(IEnumerable<VirtualStateMachine.VirtualChildState> origs)
@@ -544,8 +630,16 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualStateをクローンします。Transitions/Behaviours/Motion(VirtualClip/VirtualBlendTree)を含め再帰的に複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualState。</param>
+        /// <returns>クローンされたVirtualState。</returns>
         public VirtualState CloneVirtualState(VirtualState orig) => CloneVirtualState(orig, out _);
 
+        /// <summary>
+        /// VirtualStateをクローンします。Transitions/Behaviours/Motion(VirtualClip/VirtualBlendTree)を含め再帰的に複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualState。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualState。</returns>
         public VirtualState CloneVirtualState(VirtualState orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualStateInternal, out clonedMap);
 
         private VirtualState CloneVirtualStateInternal(VirtualState orig)
@@ -577,15 +671,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualTransitionをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualTransition> CloneVirtualTransitions(IEnumerable<VirtualTransition> origs) => CloneVirtualTransitions(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualTransitionをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualTransition> CloneVirtualTransitions(IEnumerable<VirtualTransition> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualTransitionsInternal, out clonedMap);
 
         /// <summary>
         /// VirtualTransitionをクローンします。DestinationState/DestinationStateMachine/Conditionsを含め複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualTransition。</param>
+        /// <returns>クローンされたVirtualTransition。</returns>
         public VirtualTransition CloneVirtualTransition(VirtualTransition orig) => CloneVirtualTransition(orig, out _);
 
+        /// <summary>
+        /// VirtualTransitionをクローンします。DestinationState/DestinationStateMachine/Conditionsを含め複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualTransition。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualTransition。</returns>
         public VirtualTransition CloneVirtualTransition(VirtualTransition orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualTransitionInternal, out clonedMap);
 
         private ImmutableList<VirtualTransition> CloneVirtualTransitionsInternal(IEnumerable<VirtualTransition> origs)
@@ -616,15 +726,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualStateTransitionをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateTransition> CloneVirtualStateTransitions(IEnumerable<VirtualStateTransition> origs) => CloneVirtualStateTransitions(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualStateTransitionをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualStateTransition> CloneVirtualStateTransitions(IEnumerable<VirtualStateTransition> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualStateTransitionsInternal, out clonedMap);
 
         /// <summary>
         /// VirtualStateTransitionをクローンします。DestinationState/DestinationStateMachine/Conditionsを含め複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualStateTransition。</param>
+        /// <returns>クローンされたVirtualStateTransition。</returns>
         public VirtualStateTransition CloneVirtualStateTransition(VirtualStateTransition orig) => CloneVirtualStateTransition(orig, out _);
 
+        /// <summary>
+        /// VirtualStateTransitionをクローンします。DestinationState/DestinationStateMachine/Conditionsを含め複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualStateTransition。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualStateTransition。</returns>
         public VirtualStateTransition CloneVirtualStateTransition(VirtualStateTransition orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualStateTransitionInternal, out clonedMap);
 
         private ImmutableList<VirtualStateTransition> CloneVirtualStateTransitionsInternal(IEnumerable<VirtualStateTransition> origs)
@@ -662,6 +788,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のAnimatorConditionをまとめてクローンします。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた配列。</returns>
         public AnimatorCondition[] CloneAnimatorConditions(IEnumerable<AnimatorCondition> origs)
         {
             return origs.Select(orig => CloneAnimatorCondition(orig)).ToArray();
@@ -670,6 +798,8 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// AnimatorConditionをクローンします。AnimatorConditionは値型のため、実質的には元の値をそのまま返します。
         /// </summary>
+        /// <param name="orig">クローン元のAnimatorCondition。</param>
+        /// <returns>クローンされたAnimatorCondition。</returns>
         public AnimatorCondition CloneAnimatorCondition(AnimatorCondition orig)
         {
             return orig;
@@ -678,15 +808,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のStateMachineBehaviourをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<StateMachineBehaviour> CloneStateMachineBehaviours(IEnumerable<StateMachineBehaviour> origs) => CloneStateMachineBehaviours(origs, out _);
 
+        /// <summary>
+        /// 複数のStateMachineBehaviourをまとめてクローンします。ClonePolicyがKeepReference未満のものは結果から除外されます。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<StateMachineBehaviour> CloneStateMachineBehaviours(IEnumerable<StateMachineBehaviour> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneStateMachineBehavioursInternal, out clonedMap);
 
         /// <summary>
         /// StateMachineBehaviourをクローンします。実際の具象型のインスタンスが生成され、シリアライズ内容がコピーされます。
         /// </summary>
+        /// <param name="orig">クローン元のStateMachineBehaviour。</param>
+        /// <returns>クローンされたStateMachineBehaviour。</returns>
         public StateMachineBehaviour CloneStateMachineBehaviour(StateMachineBehaviour orig) => CloneStateMachineBehaviour(orig, out _);
 
+        /// <summary>
+        /// StateMachineBehaviourをクローンします。実際の具象型のインスタンスが生成され、シリアライズ内容がコピーされます。
+        /// </summary>
+        /// <param name="orig">クローン元のStateMachineBehaviour。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたStateMachineBehaviour。</returns>
         public StateMachineBehaviour CloneStateMachineBehaviour(StateMachineBehaviour orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneStateMachineBehaviourInternal, out clonedMap);
 
         private ImmutableList<StateMachineBehaviour> CloneStateMachineBehavioursInternal(IEnumerable<StateMachineBehaviour> origs)
@@ -708,8 +854,16 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualClipをクローンします。orig.Clone()(NDMF標準の複製メソッド)を使い、カーブ・設定を完全コピーします。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualClip。</param>
+        /// <returns>クローンされたVirtualClip。</returns>
         public VirtualClip CloneVirtualClip(VirtualClip orig) => CloneVirtualClip(orig, out _);
 
+        /// <summary>
+        /// VirtualClipをクローンします。orig.Clone()(NDMF標準の複製メソッド)を使い、カーブ・設定を完全コピーします。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualClip。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualClip。</returns>
         public VirtualClip CloneVirtualClip(VirtualClip orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualClipInternal, out clonedMap);
 
         private VirtualClip CloneVirtualClipInternal(VirtualClip orig)
@@ -721,8 +875,16 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// VirtualBlendTreeをクローンします。Childrenを含め再帰的に複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualBlendTree。</param>
+        /// <returns>クローンされたVirtualBlendTree。</returns>
         public VirtualBlendTree CloneVirtualBlendTree(VirtualBlendTree orig) => CloneVirtualBlendTree(orig, out _);
 
+        /// <summary>
+        /// VirtualBlendTreeをクローンします。Childrenを含め再帰的に複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualBlendTree。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualBlendTree。</returns>
         public VirtualBlendTree CloneVirtualBlendTree(VirtualBlendTree orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualBlendTreeInternal, out clonedMap);
 
         private VirtualBlendTree CloneVirtualBlendTreeInternal(VirtualBlendTree orig)
@@ -760,15 +922,31 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// <summary>
         /// 複数のVirtualChildMotionをまとめてクローンします。
         /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualBlendTree.VirtualChildMotion> CloneVirtualChildMotions(IEnumerable<VirtualBlendTree.VirtualChildMotion> origs) => CloneVirtualChildMotions(origs, out _);
 
+        /// <summary>
+        /// 複数のVirtualChildMotionをまとめてクローンします。
+        /// </summary>
+        /// <param name="origs">クローン元の列挙。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされた列挙。</returns>
         public IEnumerable<VirtualBlendTree.VirtualChildMotion> CloneVirtualChildMotions(IEnumerable<VirtualBlendTree.VirtualChildMotion> origs, out Dictionary<object, object> clonedMap) => CloneWithMap(origs, CloneVirtualChildMotionsInternal, out clonedMap);
 
         /// <summary>
         /// VirtualChildMotionをクローンします。Motion(VirtualClip/VirtualBlendTree)を含め複製されます。
         /// </summary>
+        /// <param name="orig">クローン元のVirtualChildMotion。</param>
+        /// <returns>クローンされたVirtualChildMotion。</returns>
         public VirtualBlendTree.VirtualChildMotion CloneVirtualChildMotion(VirtualBlendTree.VirtualChildMotion orig) => CloneVirtualChildMotion(orig, out _);
 
+        /// <summary>
+        /// VirtualChildMotionをクローンします。Motion(VirtualClip/VirtualBlendTree)を含め複製されます。
+        /// </summary>
+        /// <param name="orig">クローン元のVirtualChildMotion。</param>
+        /// <param name="clonedMap">このクローン完了時点での、元オブジェクトから複製後オブジェクトへのマップ。</param>
+        /// <returns>クローンされたVirtualChildMotion。</returns>
         public VirtualBlendTree.VirtualChildMotion CloneVirtualChildMotion(VirtualBlendTree.VirtualChildMotion orig, out Dictionary<object, object> clonedMap) => CloneWithMap(orig, CloneVirtualChildMotionInternal, out clonedMap);
 
         private ImmutableList<VirtualBlendTree.VirtualChildMotion> CloneVirtualChildMotionsInternal(IEnumerable<VirtualBlendTree.VirtualChildMotion> origs)
@@ -1236,11 +1414,22 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// </summary>
         public record InvalidEntry
         {
+            /// <summary>問題の種別を取得します。</summary>
             public InvalidType InvalidType { get; }
+            /// <summary>問題のあるオブジェクトを取得します。</summary>
             public object InvalidEntryObject { get; }
+            /// <summary>InvalidEntryObjectを参照していた親オブジェクトを取得します。</summary>
             public object ReferencedFrom { get; }
+            /// <summary>InvalidEntryObjectが参照されていたメンバー名を取得します。</summary>
             public string MemberName { get; }
 
+            /// <summary>
+            /// InvalidEntryの新しいインスタンスを初期化します。
+            /// </summary>
+            /// <param name="invalidType">問題の種別。</param>
+            /// <param name="invalidEntryObject">問題のあるオブジェクト。</param>
+            /// <param name="referencedFrom">invalidEntryObjectを参照していた親オブジェクト。</param>
+            /// <param name="memberName">invalidEntryObjectが参照されていたメンバー名。</param>
             public InvalidEntry(InvalidType invalidType, object invalidEntryObject, object referencedFrom, string memberName)
             {
                 InvalidType = invalidType;
@@ -1268,7 +1457,11 @@ namespace com.github.k_stand.ksanimatorclipboard.ndmf.editor
         /// </summary>
         public enum ClonePolicy
         {
-            /// <summary>未設定(このポリシーのオブジェクトをクローンしようとした場合、例外を吐く)</summary>
+            /// <summary>
+            /// 未設定(このポリシーのオブジェクトをクローンしようとした場合、例外を吐く)。
+            /// ただしVirtualMotion(VirtualClip/VirtualBlendTree)は例外で、UnSettingのままでも例外にはならず、
+            /// DefaultPolicyに基づき自動的にKeepReference以上へ昇格する(詳細はTryGetOrCreateVirtualMotionCloneInstance参照)。
+            /// </summary>
             UnSetting,
             /// <summary>nullとして扱う(切り離す)</summary>
             Detach,
