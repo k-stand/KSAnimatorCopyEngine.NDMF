@@ -6,7 +6,7 @@
     "description": "KS Animator Copy EngineのNDMF Virtual Animator API(nadena.dev.ndmf.animator)対応版",
     "author": {
         "name": "k-stand",
-        "url": "https://github.com/k-stand/KSAnimatorClipboard"
+        "url": "https://github.com/k-stand/KSAnimatorCopyEngine.NDMF"
     },
     "license": "MIT",
     "url": "",
