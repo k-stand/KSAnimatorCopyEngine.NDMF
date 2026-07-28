@@ -25,7 +25,7 @@ VRChat Avatars SDK固有の型(`VRCAvatarParameterDriver`)への対応は標準�
 ### VPAI unitypackageでVCCにインストールする方法
 1. 以下から任意のバージョンの`com.github.k-stand.ksanimatorcopyengine.ndmf.X.x.x-installer.unitypackage`をダウンロードして、導入したいプロジェクトにインポートしてください。
 
-0.x.x : [com.github.k-stand.ksanimatorcopyengine.ndmf.0.x.x-installer.unitypackage](https://github.com/k-stand/KSAnimatorCopyEngine.NDMF/releases/download/0.3.0/com.github.k-stand.ksanimatorcopyengine.0.x.x-installer.unitypackage)
+0.x.x : [com.github.k-stand.ksanimatorcopyengine.ndmf.0.x.x-installer.unitypackage](https://github.com/k-stand/KSAnimatorCopyEngine.NDMF/releases/download/0.3.0/com.github.k-stand.ksanimatorcopyengine.ndmf.0.x.x-installer.unitypackage)
 
 ## 使用方法
 ```csharp
@@ -51,7 +51,7 @@ VirtualAnimatorCopyEngine.PasteIntoStateMachine(cloned, destStateMachine, cloneC
 - `com.vrchat.avatars`
 
 ## License
-[MIT License](https://github.com/k-stand/KSAnimatorClipboard/blob/main/LICENSE.txt)
+[MIT License](https://github.com/k-stand/KSAnimatorCopyEngine.NDMF/blob/main/LICENSE.txt)
 
 ## 更新履歴
 ### [2026-07-28] 0.3.0
